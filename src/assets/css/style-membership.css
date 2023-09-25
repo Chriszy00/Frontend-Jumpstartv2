@@ -1,0 +1,252 @@
+/* body {
+    background: #eee;
+    margin-top: 20px;
+} */
+
+@font-face {
+    font-family: SatoshiReg;
+    src: url(/src/assets/fonts/Satoshi_Complete/Fonts/OTF/Satoshi-Regular.otf)
+  }
+  @font-face {
+    font-family: SatoshiBold;
+    src: url(/src/assets/fonts/Satoshi_Complete/Fonts/OTF/Satoshi-Bold.otf);
+  }
+  @font-face {
+    font-family: SatoshiLight;
+    src: url(/src/assets/fonts/Satoshi_Complete/Fonts/OTF/Satoshi-Light.otf);
+  }
+  @font-face {
+    font-family: SatoshiMed;
+    src: url(/src/assets/fonts/Satoshi_Complete/Fonts/OTF/Satoshi-Medium.otf);
+  }
+  @font-face {
+    font-family: SatoshiBlack;
+    src: url(/src/assets/fonts/Satoshi_Complete/Fonts/OTF/Satoshi-Black.otf);
+  }
+
+/* ===== PRICING PAGE ===== */
+
+.custom {
+    margin-top: 50px !important;
+}
+
+.custom-font-style {
+    font-family: SatoshiMed !important;
+}
+.price-tabs {
+    background-color: #fff !important;
+    box-shadow: 0 5px 20px 0 rgba(39, 39, 39, 0.1) !important;
+    display: inline-block !important;
+    padding: 7px !important;
+    border-radius: 40px !important;
+    border: 1px solid #00b5ec !important;
+    margin-bottom: 45px !important;
+}
+
+@media (min-width: 768px) {
+    .price-tabs {
+        margin-bottom: 60px !important;
+    }
+}
+
+.price-tabs .nav-link {
+    color: #00b5ec !important;
+    font-weight: 500 !important;
+    font-family: "Montserrat", sans-serif !important;
+    font-size: 16px !important;
+    padding: 12px 35px !important;
+    display: inline-block !important;
+    text-transform: capitalize !important;
+    border-radius: 40px !important;
+    transition: all 0.3s ease !important;
+}
+
+@media (min-width: 768px) {
+    .price-tabs .nav-link {
+        padding: 12px 40px !important;
+    }
+}
+
+.price-tabs .nav-link.active {
+    background-color: #00b5ec !important;
+    color: #fff !important;
+}
+
+.price-item {
+    background-color: #fff !important;
+    box-shadow: 0 5px 30px 0 rgba(39, 39, 39, 0.15) !important;
+    border-radius: 10px !important;
+}
+
+@media (min-width: 768px) {
+    .price-item {
+        margin: 0 20px !important;
+        padding-top: 20px !important;
+    }
+}
+
+.price-item .price-top {
+    box-shadow: 0 5px 30px 0 rgba(39, 39, 39, 0.15) !important;
+    padding: 50px 0 25px !important;
+    background-color: #299eb3 !important;
+    border-radius: 10px !important;
+    position: relative !important;
+    z-index: 0 !important;
+    margin-bottom: 33px !important;
+}
+
+@media (min-width: 768px) {
+    .price-item .price-top {
+        margin: 0 -20px !important;
+        border-radius: 20px !important;
+    }
+}
+
+.price-item .price-top:after {
+    height: 50px !important;
+    width: 100% !important;
+    border-radius: 0 0 10px 10px !important;
+    background-color: #299eb3 !important;
+    position: absolute !important;
+    content: '' !important;
+    left: 0 !important;
+    bottom: -17px !important;
+    z-index: -1 !important;
+    transform: skewY(5deg) !important;
+    box-shadow: 0 5px 10px 0 rgba(113, 113, 113, 0.15) !important;
+}
+
+@media (min-width: 768px) {
+    .price-item .price-top:after {
+        border-radius: 0 0 20px 20px !important;
+    }
+}
+
+.price-item .price-top * {
+    color: #fff !important;
+}
+
+.price-item .price-top h2 {
+    font-weight: 700 !important;
+}
+
+.price-item .price-top h2 sup {
+    top: 13px !important;
+    left: -5px !important;
+    font-size: 0.35em !important;
+    font-weight: 500 !important;
+    vertical-align: top !important;
+}
+
+.price-item .price-content {
+    padding: 30px !important;
+    padding-bottom: 40px !important;
+}
+
+.price-item .price-content li {
+    position: relative !important;
+    margin-bottom: 15px !important;
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+    text-align: center !important;
+}
+
+@media (min-width: 992px) {
+    .price-item .price-content li {
+        padding-left: 28px !important;
+        text-align: left !important;
+    }
+}
+
+@media (min-width: 992px) {
+    .price-item .price-content li i {
+        position: absolute !important;
+        left: 0 !important;
+        top: 3px !important;
+    }
+}
+
+.price-item .price-content .zmdi-check {
+    color: #28a745 !important;
+}
+
+.price-item .price-content .zmdi-close {
+    color: #f00 !important;
+}
+
+.popular {
+    background-color: #299eb3 !important;
+}
+
+.popular .price-top {
+    background-color: #fff !important;
+}
+
+.popular .price-top:after {
+    background-color: #fff !important;
+}
+
+.popular .price-top h4 {
+    color: #101f41 !important;
+}
+
+.popular .price-top h2, .popular .price-top span, .popular .price-top sup {
+    color: #00b5ec !important;
+}
+
+.popular .price-content ul *,
+.popular .price-content ul .zmdi-close, .popular .price-content ul .zmdi-check {
+    color: #fff !important;
+}
+
+.btn-custom1 {
+    background-color: #d0472f !important;
+    color: white !important;
+    border: none !important;
+}
+
+.btn-custom2 {
+    background-color: #d0472f !important;
+    color: white !important;
+    border: none !important;
+}
+
+.btn-outline-custom2 {
+    background-color: #299eb3 !important;
+    color: white !important;
+    border: none !important;
+}
+
+/* Add this CSS to your existing styles */
+.scrollable-list {
+    max-height: 250px !important; /* Adjust the max height as needed */
+    overflow-y: hidden !important; /* Initially hide the scrollbar */
+    margin-bottom: 20px !important; /* Add margin to create spacing between columns */
+    scrollbar-width: thin !important; /* Set the width of the scrollbar */
+    scrollbar-color: transparent transparent !important; /* Set the color of the scrollbar */
+  }
+  
+  /* Define the scrollbar pseudo-elements */
+  .scrollable-list::-webkit-scrollbar {
+    width: 4px !important; /* Set the width of the scrollbar */
+  }
+  
+  .scrollable-list::-webkit-scrollbar-thumb {
+    background-color: transparent !important; /* Set the color of the scrollbar thumb */
+    border-radius: 50px !important; /* Make the scrollbar thumb oval-shaped */
+  }
+  
+  .scrollable-list:hover {
+    overflow-y: auto !important; /* Show the scrollbar on hover */
+  }
+  
+  /* Optionally, you can change the scrollbar thumb color on hover */
+  .scrollable-list:hover::-webkit-scrollbar-thumb {
+    background-color: #fbd4c6 !important;
+  }
+
+  .custom-ul {
+    list-style-type: square !important;
+  }
+  
+  
