@@ -3,7 +3,8 @@ import "../../assets/css/style-register.css";
 import axios from "axios";
 import { notification} from "antd";
 import { Link, useNavigate } from "react-router-dom";
-import {QuestionCircleOutlined} from '@ant-design/icons';
+import { register } from "../../util/APIUtils";
+
 const Register = () => {
   const navigate = useNavigate();
 
@@ -72,12 +73,11 @@ const Register = () => {
     };
 
     try {
-      await axios.post("http://localhost:8080/user/sign-up", newUser);
+      await register(newUser); // Use the register function here
       // Show success notification
       notification.success({
         message: "Registration Successful",
-        description:
-          "You have successfully registered. Please log in to continue.",
+        description: "You have successfully registered. Please log in to continue.",
       });
       console.log("Form submitted successfully");
       navigate("/login");
@@ -322,7 +322,7 @@ const Register = () => {
                   </div>
                   
                   {/* Membership Number Field */}
-                  <div className="form-group form-floating mb-3">
+                  {/* <div className="form-group form-floating mb-3">
                     <input
                       type="text"
                       className={passwordInputClass}
@@ -332,7 +332,7 @@ const Register = () => {
                     />
                     
                     <label htmlFor="floatingInput">Membership Number (optioal)</label>                            
-                  </div>
+                  </div> */}
 
                   {/* password validation box */}
                   <div className="password-validation-box">

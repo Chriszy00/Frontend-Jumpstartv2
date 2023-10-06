@@ -1,14 +1,36 @@
+import { useState, useEffect, useRef } from "react";
 import React from "react";
 import "../../assets/css/mdb.min.css";
 import "../../assets/css/style-home.css";
+import { Link } from "react-router-dom";
 
 const Home = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    // Check if a valid JWT token is present in local storage or cookies
+    const token = localStorage.getItem("accessToken"); // You should replace "jwtToken" with your actual token key
+    if (token) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, []);
+
+  const contentRef = useRef(null);
+  // Function to scroll to the top
+  const scrollToTop = () => {
+    if (contentRef.current) {
+      contentRef.current.scrollTop = 0;
+    }
+  };
   return (
-    <>
+    <div className="custom-bg min-vh-100">
       {/* carousel */}
+      {!isLoggedIn && (
       <div
         id="carouselExampleCaptions"
-        className="carousel slide carousel-fade"
+        className="carousel custom-bg slide carousel-fade"
         data-mdb-ride="carousel"
       >
         <div className="carousel-inner">
@@ -24,10 +46,14 @@ const Home = () => {
             ></div>
             <div className="carousel-caption d-none d-sm-block mb-5">
               <h1 className="mb-3">
-                <strong className="text-white custom-font-bold fs-1">Welcome to Jumpstart</strong>
+                <strong className="text-white custom-font-bold fs-1">
+                  Welcome to Jumpstart
+                </strong>
               </h1>
               <p className="mb-2">
-                <strong className="text-white fs-4 fw-normal custom-font-med">Unleash Your Style: Elevate Your Wardrobe</strong>
+                <strong className="text-white fs-4 fw-normal custom-font-med">
+                  Unleash Your Style: Elevate Your Wardrobe
+                </strong>
               </p>
               <p className="mb-4 d-none d-md-block">
                 <strong className="text-white fs-5 fw-normal custom-font">
@@ -39,16 +65,17 @@ const Home = () => {
               </p>
             </div>
           </div>
+          {/* Add more carousel items as needed */}
         </div>
       </div>
-
+      )}
       {/* Main layout */}
-      <main>
-        <div className="container custom-font">
+      <main ref={contentRef}>
+        <div className="container min-vh-100 pt-5  custom-font ">
           {/* Navbar */}
           <nav
             className="navbar navbar-expand-lg navbar-dark mt-3 mb-5 shadow p-2"
-            style={{ backgroundColor: "#607D8B" }}
+            style={{ backgroundColor: "#d0472f" }}
           >
             {/* Container wrapper */}
             <div className="container-fluid">
@@ -77,10 +104,10 @@ const Home = () => {
               >
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                   {/* Link */}
-                  <li className="nav-item acitve">
-                    <a className="nav-link text-white" href="#">
+                  <li className="nav-item active">
+                    <Link className="nav-link text-white" to="/products" onClick={scrollToTop}>
                       All
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item">
                     <a className="nav-link text-white" href="#">
@@ -149,7 +176,9 @@ const Home = () => {
                     </div>
                     <div className="card-body ">
                       <a href="" className="text-reset ">
-                        <h5 className="card-title mb-2 custom-font fw-bold">Denim shirt</h5>
+                        <h5 className="card-title mb-2 custom-font fw-bold">
+                          Denim shirt
+                        </h5>
                       </a>
                       <a href="" className="text-reset ">
                         <p>Shirt</p>
@@ -192,7 +221,9 @@ const Home = () => {
                     </div>
                     <div className="card-body">
                       <a href="" className="text-reset">
-                        <h5 className="card-title mb-2 custom-font fw-bold">Sweatshirt</h5>
+                        <h5 className="card-title mb-2 custom-font fw-bold">
+                          Sweatshirt
+                        </h5>
                       </a>
                       <a href="" className="text-reset ">
                         <p>Sport wear</p>
@@ -226,7 +257,9 @@ const Home = () => {
                     </div>
                     <div className="card-body">
                       <a href="" className="text-reset">
-                        <h5 className="card-title mb-2 custom-font-bold">Grey blouse</h5>
+                        <h5 className="card-title mb-2 custom-font-bold">
+                          Grey blouse
+                        </h5>
                       </a>
                       <a href="" className="text-reset ">
                         <p>Sport wear</p>
@@ -269,14 +302,18 @@ const Home = () => {
                     </div>
                     <div className="card-body">
                       <a href="" className="text-reset">
-                        <h5 className="card-title mb-2 custom-font-bold">Black jacket</h5>
+                        <h5 className="card-title mb-2 custom-font-bold">
+                          Black jacket
+                        </h5>
                       </a>
                       <a href="" className="text-reset ">
                         <p>Outwear</p>
                       </a>
                       <h6 className="mb-3 price">
                         <s>199$</s>
-                        <strong className="ms-2 sale custom-font-bold">179$</strong>
+                        <strong className="ms-2 sale custom-font-bold">
+                          179$
+                        </strong>
                       </h6>
                     </div>
                   </div>
@@ -309,7 +346,9 @@ const Home = () => {
                       </div>
                       <div className="card-body">
                         <a href="" className="text-reset">
-                          <h5 className="card-title mb-2 custom-font-bold">Sweatshirt</h5>
+                          <h5 className="card-title mb-2 custom-font-bold">
+                            Sweatshirt
+                          </h5>
                         </a>
                         <a href="" className="text-reset ">
                           <p>Sport wear</p>
@@ -352,7 +391,9 @@ const Home = () => {
                       </div>
                       <div className="card-body">
                         <a href="" className="text-reset">
-                          <h5 className="card-title mb-2 custom-font-bold">Grey blouse</h5>
+                          <h5 className="card-title mb-2 custom-font-bold">
+                            Grey blouse
+                          </h5>
                         </a>
                         <a href="" className="text-reset ">
                           <p>Sport wear</p>
@@ -386,7 +427,9 @@ const Home = () => {
                       </div>
                       <div className="card-body">
                         <a href="" className="text-reset">
-                          <h5 className="card-title mb-2 custom-font-bold">Black jacket</h5>
+                          <h5 className="card-title mb-2 custom-font-bold">
+                            Black jacket
+                          </h5>
                         </a>
                         <a href="" className="text-reset ">
                           <p>Outwear</p>
@@ -420,7 +463,9 @@ const Home = () => {
                       </div>
                       <div className="card-body">
                         <a href="" className="text-reset">
-                          <h5 className="card-title mb-2 custom-font-bold">Denim shirt</h5>
+                          <h5 className="card-title mb-2 custom-font-bold">
+                            Denim shirt
+                          </h5>
                         </a>
                         <a href="" className="text-reset ">
                           <p>Shirt</p>
@@ -437,58 +482,13 @@ const Home = () => {
               <div className="row">
                 {/* Repeat the product cards section if needed */}
               </div>
-
-              {/* Pagination */}
-              <nav
-                aria-label="Page navigation example"
-                className="d-flex justify-content-center mt-3"
-              >
-                <ul className="pagination">
-                  <li className="page-item disabled">
-                    <a className="page-link" href="#" aria-label="Previous">
-                      <span aria-hidden="true">&laquo;</span>
-                    </a>
-                  </li>
-                  <li className="page-item active">
-                    <a className="page-link" href="#">
-                      1
-                    </a>
-                  </li>
-                  <li className="page-item">
-                    <a className="page-link" href="#">
-                      2
-                    </a>
-                  </li>
-                  <li className="page-item">
-                    <a className="page-link" href="#">
-                      3
-                    </a>
-                  </li>
-                  <li className="page-item">
-                    <a className="page-link" href="#">
-                      4
-                    </a>
-                  </li>
-                  <li className="page-item">
-                    <a className="page-link" href="#">
-                      5
-                    </a>
-                  </li>
-                  <li className="page-item">
-                    <a className="page-link" href="#" aria-label="Next">
-                      <span aria-hidden="true">&raquo;</span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
-              {/* Pagination */}
             </div>
           </section>
           {/* Products */}
         </div>
       </main>
       {/* Main layout */}
-    </>
+    </div>
   );
 };
 

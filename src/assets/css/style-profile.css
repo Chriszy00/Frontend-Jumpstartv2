@@ -103,3 +103,7 @@
     color: white !important;
     border: none !important;
 }
+
+.custom-bg {
+  background-color: #d0472f;
+}

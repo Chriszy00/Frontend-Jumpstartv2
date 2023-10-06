@@ -26,13 +26,14 @@
 
 /* ===== PRICING PAGE ===== */
 
-.custom {
-    margin-top: 50px !important;
-}
-
 .custom-font-style {
     font-family: SatoshiMed !important;
 }
+
+.custom-bg {
+    background-color: #d0472f;
+}
+
 .price-tabs {
     background-color: #fff !important;
     box-shadow: 0 5px 20px 0 rgba(39, 39, 39, 0.1) !important;

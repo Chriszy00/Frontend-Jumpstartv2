@@ -31,8 +31,12 @@
   font-family: SatoshiBold;
 }
 
+.custom-bg {
+  background-color: #fcf3f6;
+}
+
 .carousel-item {
-      height: 50vh;
+      height: 70vh;
     }
 .card {
  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -54,5 +58,10 @@ color:#263238
 }
 
 .sale-badge {
-  background-color: #E53935
+  background-color: #E53935;
+}
+
+/* CSS for hiding the carousel */
+.carousel-hidden .main-layout {
+  margin-top: 50%; /* Adjust as needed */
 }

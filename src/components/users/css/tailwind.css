@@ -38,3 +38,11 @@
   .custom-main{
     background-color: #fcf3f6;
   }
+
+  /* Custom CSS to make icons appear as outlines */
+.outline-icon {
+  border: 1px solid #000; /* Add a border to create an outline effect */
+  border-radius: 4px; /* Optional: Add some border radius for rounded corners */
+  padding: 4px; /* Optional: Add padding for spacing */
+}
+

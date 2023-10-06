@@ -1,34 +1,58 @@
-import { API_BASE_URL, ACCESS_TOKEN } from "../constant/index";
+import axios from 'axios';
+import { API_BASE_URL, ACCESS_TOKEN } from '../constant/index';
 
-const request = (options) => {
-  const headers = new Headers({
-    "Content-Type": "application/json",
-  });
+export function request(options) {
+  const headers = {
+    'Content-Type': 'application/json',
+  };
 
   if (localStorage.getItem(ACCESS_TOKEN)) {
-    headers.append(
-      "Authorization",
-      "Bearer " + localStorage.getItem(ACCESS_TOKEN)
-    );
+    headers['Authorization'] = `Bearer ${localStorage.getItem(ACCESS_TOKEN)}`;
   }
 
-  const defaults = { headers: headers };
-  options = Object.assign({}, defaults, options);
+  const instance = axios.create({
+    baseURL: API_BASE_URL,
+    headers: headers,
+  });
 
-  return fetch(options.url, options).then((response) =>
-    response.json().then((json) => {
-      if (!response.ok) {
-        return Promise.reject(json);
-      }
-      return json;
+  return instance(options)
+    .then(response => {
+      return response.data;
     })
-  );
-};
+    .catch(error => {
+      // Handle errors here
+      throw error;
+    });
+}
 
 export function login(loginRequest) {
   return request({
-    url: API_BASE_URL + "/user/sign-in",
-    method: "POST",
-    body: JSON.stringify(loginRequest),
+    url: '/user/sign-in',
+    method: 'POST',
+    data: loginRequest,
+  });
+}
+
+// export function member(memberRequest) {
+//   return request({
+//     url: '/membership/apply',
+//     method: 'POST',
+//     data: memberRequest,
+//   });
+// }
+
+export function payment(paymentRequest) {
+  return request({
+    url: '/checkout/success',
+    method: 'POST',
+    data: paymentRequest,
+  });
+}
+
+export function register(registerRequest) {
+  return request({
+    url: '/user/sign-up',
+    method: 'POST',
+    data: registerRequest,
   });
 }

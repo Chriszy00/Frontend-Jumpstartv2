@@ -1,12 +1,68 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useHistory } from "react-router-dom";
 import "../../assets/css/style-membership.css";
+import axios from "axios";
+import { message, notification } from "antd";
 
 const Membership = () => {
 
+  const getLoggedInUserId = () => {
+    const userId = localStorage.getItem('userId'); // Retrieve user ID using the correct key
+    return userId ? Number(userId) : null; // Convert to a number if needed
+  };
+  
+  const navigate = useNavigate();
 
+  const handleMembershipApplication = (membershipType, price) => {
+    const userId = getLoggedInUserId();
+    const roleName = localStorage.getItem('roleName'); // Retrieve user's role
+  
+    const headers = {};
+  
+    if (localStorage.getItem('ACCESS_TOKEN')) {
+      headers['Authorization'] = `Bearer ${localStorage.getItem('ACCESS_TOKEN')}`;
+    }
+  
+    const membershipData = {
+      membershipType: membershipType,
+      price: price,
+      member: {
+        id: userId,
+        roleName: roleName, // Include the roleName in the request
+      },
+    };
+  
+    localStorage.setItem("membershipData", JSON.stringify(membershipData));
+  
+    axios
+      .post("http://localhost:8080/membership/apply", membershipData, {
+        headers: headers, // Pass the headers to the Axios request
+      })
+      .then((response) => {
+        console.log("Membership application successful:", response.data);
+  
+        // Show success notification
+        notification.success({
+          message: "Success",
+          description: "Membership application successful",
+        });
+  
+        navigate("/payment-summary");
+      })
+      .catch((error) => {
+        console.error("Error applying for membership", error);
+  
+        // Show error notification
+        notification.error({
+          message: "Error",
+          description: "Error applying for membership",
+        });
+      });
+  };
+  
   return (
-    <div className="container custom min-vh-100 custom-font-style">
+    <div className="custom-bg pt-5">
+    <div className="container vh-100 custom-font-style ">
       <div className="text-center">
         <div className="" role="tablist">
           <h2 className="pb-5 custom-font-style">
@@ -18,9 +74,9 @@ const Membership = () => {
         className="tab-content wow fadeIn"
         style={{ visibility: "visible", animationName: "fadeIn" }}
       >
-        <div role="tabpanel" className="tab-pane fade show active " id="yearly">
+        <div role="tabpanel" className="tab-pane fade show active" id="yearly">
           <div className="row justify-content-center">
-            <div className="col-md-6 col-lg-4 mb-30">
+            <div className="col-md-6 col-lg-4 mb-30 mb-5">
               <div className="price-item text-center popular">
                 <div className="price-top custom-font-style">
                   <h4 className="custom-font-style">Premium</h4>
@@ -57,11 +113,12 @@ const Membership = () => {
                     </ul>
                   </div>
                   <div className="d-flex flex-column align-items-center">
-                    <Link
+                    <button
                       className="btn btn-custom1 btn-light mb-2 w-100"
+                      onClick={() => handleMembershipApplication("Premium", 29.99)}
                     >
                       Apply Membership
-                    </Link>
+                    </button>
                     <Link
                       to="/renewal"
                       className="btn btn-outline-custom1 btn-light mb-2 w-100"
@@ -117,6 +174,7 @@ const Membership = () => {
                   <div className="d-flex flex-column align-items-center">
                     <Link
                       className="btn btn-custom2 btn-light mb-2 w-100"
+                      onClick={() => handleMembershipApplication("Business", 69.99)}
                     >
                       Apply Membership
                     </Link>
@@ -133,6 +191,7 @@ const Membership = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };

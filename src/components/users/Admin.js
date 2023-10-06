@@ -1,11 +1,39 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../assets/js/init-alpine";
 import "./css/tailwind.css";
-import "./css/tailwind.output.css"
+import "./css/tailwind.output.css";
+import { useNavigate, useParams } from "react-router";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNotification } from "../common/NotificationContext";
+
 function Admin() {
   const [isSideMenuOpen, setSideMenuOpen] = useState(false);
-  const [isNotificationsMenuOpen, setNotificationsMenuOpen] = useState(false);
   const [dark, setDark] = useState(false);
+  const [application, setApplications] = useState([]);
+  const navigate = useNavigate();
+  const { userId } = useParams();
+
+  useEffect(() => {
+    fetchMembershipApplications();
+  }, []);
+
+  const fetchMembershipApplications = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:8080/membership/applications"
+      );
+      if (response.status === 200) {
+        setApplications(response.data);
+      } else {
+        console.error("Failed to fetch membership applications");
+      }
+    } catch (error) {
+      console.error("Error fetching membership applications:", error);
+    }
+  };
 
   const toggleSideMenu = () => {
     setSideMenuOpen(!isSideMenuOpen);
@@ -15,17 +43,83 @@ function Admin() {
     setSideMenuOpen(false);
   };
 
-  const toggleNotificationsMenu = () => {
-    setNotificationsMenuOpen(!isNotificationsMenuOpen);
-  };
-
-  const closeNotificationsMenu = () => {
-    setNotificationsMenuOpen(false);
-  };
-
   const toggleTheme = () => {
     setDark(!dark);
   };
+
+  const handleLogout = () => {
+    localStorage.clear();
+    console.log("Logout");
+    navigate("/");
+  };
+
+  const [disableApproveButton, setDisableApproveButton] = useState(false);
+  const [disableDenyButton, setDisableDenyButton] = useState(false);
+
+  const { showNotification } = useNotification();
+
+  const handleApproval = async (id) => {
+    try {
+      const response = await axios.put(
+        `http://localhost:8080/admin/${id}/approve`
+      );
+      if (response.status === 200) {
+        setApplications((applications) =>
+          applications.map((application) =>
+            application.id === id
+              ? { ...application, status: "approved" }
+              : application
+          )
+        );
+
+        // Disable the "Approve" button after it's clicked
+        setDisableApproveButton(true);
+
+        // Enable the "Deny" button after approval
+        setDisableDenyButton(false);
+
+        // Show a success notification using the NotificationProvider
+        showNotification("Application approved successfully", "success");
+        console.log('Notification Sent')
+      } else {
+        console.error("Failed to approve membership application");
+      }
+    } catch (error) {
+      console.error("Error approving membership application:", error);
+    }
+  };
+
+  const handleDenial = async (id) => {
+    try {
+      const response = await axios.put(
+        `http://localhost:8080/admin/${id}/deny`
+      );
+      if (response.status === 200) {
+        setApplications((applications) =>
+          applications.map((application) =>
+            application.id === id
+              ? { ...application, status: "denied" }
+              : application
+          )
+        );
+
+        // Disable the "Deny" button after it's clicked
+        setDisableDenyButton(true);
+
+        // Enable the "Approve" button after denial
+        setDisableApproveButton(false);
+
+        // Show a success notification using the NotificationProvider
+        showNotification("Application denied", "error");
+        console.log('Notification Sent')
+      } else {
+        console.error("Failed to deny membership application");
+      }
+    } catch (error) {
+      console.error("Error denying membership application:", error);
+    }
+  };
+  const userID = localStorage.getItem("userId");
 
   return (
     <div className={`flex h-screen ${dark ? "dark" : ""}`}>
@@ -44,31 +138,36 @@ function Admin() {
           </a>
           <ul className="mt-6 p-0">
             <li className="relative px-6 py-3">
-              <span
-                className="absolute inset-y-0 left-0 w-1 rounded-tr-lg rounded-br-lg"
-                style={{ backgroundColor: "#d0472f", width: "5px" }}
-                aria-hidden="true"
-              ></span>
               <a
                 className="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
                 href="dashboard"
               >
-                <svg
-                  className="w-5 h-5"
-                  aria-hidden="true"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
-                </svg>
+                <i className="fa fa-home fa-2x"></i>
                 <span className="ml-4">Dashboard</span>
               </a>
             </li>
-            
+
+            <li className="relative px-6 py-3">
+              <Link
+                className="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
+                to={`/user/profile/${userID}`}
+              >
+                <i className="fa fa-user fa-2x"></i>
+                <span className="ml-4">Profile</span>
+              </Link>
+            </li>
+
+            <li className="relative px-6 py-3">
+              <a
+                className="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
+                href="/"
+              >
+                <i class="fa fa-sign-out fa-2x"></i>
+                <span className="ml-3" onClick={handleLogout}>
+                  Logout
+                </span>
+              </a>
+            </li>
           </ul>
           {/* Add more sidebar items here */}
         </div>
@@ -316,34 +415,56 @@ function Admin() {
               <table className="w-full whitespace-no-wrap">
                 <thead>
                   <tr className="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800 custom-font-bold">
-                    <th className="px-4 py-3">Client</th>
-                    <th className="px-4 py-3">Amount</th>
+                    <th className="px-4 py-3">Member Number</th>
+                    <th className="px-4 py-3">Membership Type</th>
                     <th className="px-4 py-3">Status</th>
                     <th className="px-4 py-3">Date</th>
+                    <th className="px-4 py-3">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                  <tr className="text-gray-700 dark:text-gray-400">
-                    <td className="px-4 py-3">
-                      <div className="flex items-center text-sm">
-                        {/* Avatar with inset shadow */}
-                 
-                        <div className="custom-font-med">
-                          <p className="font-semibold fs-6 m-0">Hans Burger</p>
-                          <p className="text-md text-gray-600 dark:text-gray-400">
-                            10x Developer
-                          </p>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="px-4 py-3 text-md">$ 863.45</td>
-                    <td className="px-4 py-3 text-md">
-                      <span className="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
-                        Approved
-                      </span>
-                    </td>
-                    <td className="px-4 py-3 text-md">6/10/2020</td>
-                  </tr>
+                  {application.map((application) => (
+                    <tr
+                      key={application.id}
+                      className="text-gray-700 dark:text-gray-400"
+                    >
+                      <td className="px-4 py-3">
+                        {application.membershipNumber}
+                      </td>
+                      <td className="px-4 py-3">
+                        {application.membershipType}
+                      </td>
+                      <td className="px-4 py-3">
+                        {application.status.toLowerCase() === "approved"
+                          ? "Approved"
+                          : application.status.toLowerCase() === "denied"
+                          ? "Denied"
+                          : "Pending"}
+                      </td>
+                      <td className="px-4 py-3">{application.approvedDate}</td>
+                      <td className="px-4 py-3">
+                        <button
+                          className="btn btn-primary"
+                          onClick={() => handleApproval(application.id)}
+                          disabled={
+                            disableApproveButton ||
+                            application.status === "approved"
+                          }
+                        >
+                          Approve
+                        </button>
+                        <button
+                          className="ml-2 btn btn-danger"
+                          onClick={() => handleDenial(application.id)}
+                          disabled={
+                            disableDenyButton || application.status === "denied"
+                          }
+                        >
+                          Deny
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>

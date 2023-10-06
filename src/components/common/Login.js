@@ -19,8 +19,6 @@ function Login() {
     setOpen(false);
   }
 
-
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -120,39 +118,6 @@ function Login() {
                     />
                     <label htmlFor="password">Password</label>
                   </div>
-
-                  <div className="mt-4 custom-font">
-                    <Button 
-                      type="primary custom-button"
-                      className=" custom-font"
-                      onClick={showModal}>
-                        Are you an Exclusive Member?
-                    </Button>
-                    <Modal
-                      title="Are you a Jumpstart Member?"
-                      className="custom-font"
-                      visible={open}
-                      onCancel={handleCancel}
-                      centered
-                      // bodyStyle={{
-                      //   display: "flex",
-                      //   justifyContent: "center",
-                      //   alignItems: "center",
-                      // }}
-                      >
-
-                      <div className="form-group form-floating mb-3">
-                        <input
-                          type="text"
-                          className=""
-                          id="member"
-                          placeholder="Enter your Members Number"/>
-                        <label htmlFor="member"></label>
-                      </div>
-
-                    </Modal>
-                  </div>
-
                   <div className="py-3 fs-5">
                     <div className="mt-4">
                       <Link to="#" className="TC fw-bold custom-font">
