@@ -1,0 +1,48 @@
+@font-face {
+    font-family: SatoshiReg;
+    src: url(/src/assets/fonts/Satoshi_Complete/Fonts/OTF/Satoshi-Regular.otf)
+  }
+  @font-face {
+    font-family: SatoshiBold;
+    src: url(/src/assets/fonts/Satoshi_Complete/Fonts/OTF/Satoshi-Bold.otf);
+  }
+  @font-face {
+    font-family: SatoshiLight;
+    src: url(/src/assets/fonts/Satoshi_Complete/Fonts/OTF/Satoshi-Light.otf);
+  }
+  @font-face {
+    font-family: SatoshiMed;
+    src: url(/src/assets/fonts/Satoshi_Complete/Fonts/OTF/Satoshi-Medium.otf);
+  }
+  @font-face {
+    font-family: SatoshiBlack;
+    src: url(/src/assets/fonts/Satoshi_Complete/Fonts/OTF/Satoshi-Black.otf);
+  }
+  
+  .custom-font {
+    font-family: SatoshiReg;
+  } 
+  
+  .custom-font-med {
+    font-family: SatoshiMed;
+  }
+  
+  .custom-font-bold {
+    font-family: SatoshiBold;
+  }
+
+  .btn-custom {
+    color: #d0472f;
+  }
+
+  .bg-navbar1 {
+    background-color: #b8efdc;
+  }
+
+  .bg-navbar2 {
+    background-color: #fcf3f6;
+  }
+
+  .bg-custom-color {
+    background-color: #b8efdc;
+  }

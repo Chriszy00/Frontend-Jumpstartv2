@@ -1,0 +1,34 @@
+@font-face {
+    font-family: SatoshiReg;
+    src: url(/src/assets/fonts/Satoshi_Complete/Fonts/OTF/Satoshi-Regular.otf)
+  }
+  @font-face {
+    font-family: SatoshiBold;
+    src: url(/src/assets/fonts/Satoshi_Complete/Fonts/OTF/Satoshi-Bold.otf);
+  }
+  @font-face {
+    font-family: SatoshiLight;
+    src: url(/src/assets/fonts/Satoshi_Complete/Fonts/OTF/Satoshi-Light.otf);
+  }
+  @font-face {
+    font-family: SatoshiMed;
+    src: url(/src/assets/fonts/Satoshi_Complete/Fonts/OTF/Satoshi-Medium.otf);
+  }
+  @font-face {
+    font-family: SatoshiBlack;
+    src: url(/src/assets/fonts/Satoshi_Complete/Fonts/OTF/Satoshi-Black.otf);
+  }
+
+/* ===== PRICING PAGE ===== */
+
+.custom {
+    margin-top: 50px !important;
+}
+
+.custom-font-style {
+    font-family: SatoshiMed !important;
+}
+
+.custom-bg {
+    background-color: #d0472f;
+}
