@@ -183,7 +183,7 @@ const Home = () => {
                       <a href="" className="text-reset ">
                         <p>Shirt</p>
                       </a>
-                      <h6 className="mb-3 price custom-font fw-bold">120$</h6>
+                      <h6 className="mb-3 price custom-font fw-bold">119.99$</h6>
                     </div>
                   </div>
                 </div>
@@ -228,7 +228,7 @@ const Home = () => {
                       <a href="" className="text-reset ">
                         <p>Sport wear</p>
                       </a>
-                      <h6 className="mb-3 price custom-font fw-bold">139$</h6>
+                      <h6 className="mb-3 price custom-font fw-bold">139.99$</h6>
                     </div>
                   </div>
                 </div>
@@ -264,7 +264,7 @@ const Home = () => {
                       <a href="" className="text-reset ">
                         <p>Sport wear</p>
                       </a>
-                      <h6 className="mb-3 price custom-font-bold">99$</h6>
+                      <h6 className="mb-3 price custom-font-bold">99.99$</h6>
                     </div>
                   </div>
                 </div>
@@ -283,11 +283,7 @@ const Home = () => {
                       <a href="#!">
                         <div className="mask">
                           <div className="d-flex justify-content-start align-items-end h-100">
-                            <h5>
-                              <span className="badge sale-badge ms-2">
-                                -10%
-                              </span>
-                            </h5>
+
                           </div>
                         </div>
                         <div className="hover-overlay">
@@ -309,12 +305,7 @@ const Home = () => {
                       <a href="" className="text-reset ">
                         <p>Outwear</p>
                       </a>
-                      <h6 className="mb-3 price">
-                        <s>199$</s>
-                        <strong className="ms-2 sale custom-font-bold">
-                          179$
-                        </strong>
-                      </h6>
+                      <h6 className="mb-3 price custom-font-bold">199.99$</h6>
                     </div>
                   </div>
                 </div>
@@ -353,7 +344,7 @@ const Home = () => {
                         <a href="" className="text-reset ">
                           <p>Sport wear</p>
                         </a>
-                        <h6 className="mb-3 price custom-font-bold">139$</h6>
+                        <h6 className="mb-3 price custom-font-bold">149.99$</h6>
                       </div>
                     </div>
                   </div>
@@ -398,7 +389,7 @@ const Home = () => {
                         <a href="" className="text-reset ">
                           <p>Sport wear</p>
                         </a>
-                        <h6 className="mb-3 price custom-font-bold">99$</h6>
+                        <h6 className="mb-3 price custom-font-bold">89.99$</h6>
                       </div>
                     </div>
                   </div>
@@ -434,7 +425,7 @@ const Home = () => {
                         <a href="" className="text-reset ">
                           <p>Outwear</p>
                         </a>
-                        <h6 className="mb-3 price custom-font-bold">199$</h6>
+                        <h6 className="mb-3 price custom-font-bold">219.99$</h6>
                       </div>
                     </div>
                   </div>
@@ -470,7 +461,7 @@ const Home = () => {
                         <a href="" className="text-reset ">
                           <p>Shirt</p>
                         </a>
-                        <h6 className="mb-3 price custom-font-bold">120$</h6>
+                        <h6 className="mb-3 price custom-font-bold">124.99$</h6>
                       </div>
                     </div>
                   </div>
