@@ -1,28 +1,41 @@
-import React, { useState } from "react";
-import { Link, useNavigate, useHistory } from "react-router-dom";
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom"; // Import BrowserRouter
 import "../../assets/css/style-membership.css";
 import axios from "axios";
-import { message, notification } from "antd";
+import { notification } from "antd";
 
 const Membership = () => {
-
   const getLoggedInUserId = () => {
-    const userId = localStorage.getItem('userId'); // Retrieve user ID using the correct key
+    const userId = localStorage.getItem("userId"); // Retrieve user ID using the correct key
     return userId ? Number(userId) : null; // Convert to a number if needed
   };
-  
+
   const navigate = useNavigate();
 
   const handleMembershipApplication = (membershipType, price) => {
     const userId = getLoggedInUserId();
-    const roleName = localStorage.getItem('roleName'); // Retrieve user's role
-  
-    const headers = {};
-  
-    if (localStorage.getItem('ACCESS_TOKEN')) {
-      headers['Authorization'] = `Bearer ${localStorage.getItem('ACCESS_TOKEN')}`;
+    const roleName = localStorage.getItem("roleName"); // Retrieve user's role
+
+    if (!userId) {
+      // User is not logged in, show a notification and redirect to the login page
+      notification.error({
+        message: "Jumpstart: ERROR",
+        description: "Please log in to apply for membership",
+      });
+
+      navigate("/login"); // Replace "/login" with the actual login route
+      return; // Stop further execution
     }
-  
+
+    const headers = {};
+
+    if (localStorage.getItem("ACCESS_TOKEN")) {
+      headers["Authorization"] = `Bearer ${localStorage.getItem(
+          "ACCESS_TOKEN"
+      )}`;
+    }
+
     const membershipData = {
       membershipType: membershipType,
       price: price,
@@ -31,33 +44,33 @@ const Membership = () => {
         roleName: roleName, // Include the roleName in the request
       },
     };
-  
+
     localStorage.setItem("membershipData", JSON.stringify(membershipData));
-  
+
     axios
-      .post("http://localhost:8080/membership/apply", membershipData, {
-        headers: headers, // Pass the headers to the Axios request
-      })
-      .then((response) => {
-        console.log("Membership application successful:", response.data);
-  
-        // Show success notification
-        notification.success({
-          message: "Success",
-          description: "Membership application successful",
+        .post("http://localhost:8080/membership/apply", membershipData, {
+          headers: headers, // Pass the headers to the Axios request
+        })
+        .then((response) => {
+          console.log("Membership application successful:", response.data);
+
+          // Show success notification
+          notification.success({
+            message: "Success",
+            description: "Membership application successful",
+          });
+
+          navigate("/payment-summary");
+        })
+        .catch((error) => {
+          console.error("Error applying for membership", error);
+
+          // Show error notification
+          notification.error({
+            message: "Error",
+            description: "Error applying for membership",
+          });
         });
-  
-        navigate("/payment-summary");
-      })
-      .catch((error) => {
-        console.error("Error applying for membership", error);
-  
-        // Show error notification
-        notification.error({
-          message: "Error",
-          description: "Error applying for membership",
-        });
-      });
   };
   
   return (
@@ -172,12 +185,12 @@ const Membership = () => {
                     </ul>
                   </div>
                   <div className="d-flex flex-column align-items-center">
-                    <Link
+                    <button
                       className="btn btn-custom2 btn-light mb-2 w-100"
                       onClick={() => handleMembershipApplication("Business", 69.99)}
                     >
                       Apply Membership
-                    </Link>
+                    </button>
                     <Link
                       to="/renewal"
                       className="btn btn-outline-custom2 btn-light mb-2 w-100"
