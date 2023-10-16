@@ -31,7 +31,7 @@ const UserProfile = ({ match }) => {
     };
 
     if (userId) {
-      loadUser();
+      loadUser().then(r => console.log("User loaded"));
     }
   }, [userId]);
 

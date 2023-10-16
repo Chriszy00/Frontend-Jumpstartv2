@@ -17,7 +17,7 @@ function Admin() {
     const {userId} = useParams();
 
     useEffect(() => {
-        fetchMembershipApplications();
+        fetchMembershipApplications().then(r => console.log("Applications fetched"));
     }, []);
 
     const fetchMembershipApplications = async () => {

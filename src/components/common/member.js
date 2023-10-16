@@ -4,6 +4,7 @@ import { BrowserRouter as Router } from "react-router-dom"; // Import BrowserRou
 import "../../assets/css/style-membership.css";
 import axios from "axios";
 import { notification } from "antd";
+import {apply} from "../../util/APIUtils";
 
 const Membership = () => {
   const getLoggedInUserId = () => {
@@ -47,10 +48,7 @@ const Membership = () => {
 
     localStorage.setItem("membershipData", JSON.stringify(membershipData));
 
-    axios
-        .post("http://localhost:8080/membership/apply", membershipData, {
-          headers: headers, // Pass the headers to the Axios request
-        })
+    apply(membershipData)
         .then((response) => {
           console.log("Membership application successful:", response.data);
 
@@ -71,6 +69,7 @@ const Membership = () => {
             description: "Error applying for membership",
           });
         });
+
   };
   
   return (

@@ -43,11 +43,11 @@ function Login() {
         // onLogin(response.partnerId); // Call the prop function with the partnerId
 
         // Determine the user's role and redirect accordingly
-        if (response.roleName === "ADMINISTRATOR") {
+        if (response.roleName === "ROLE_ADMINISTRATOR") {
           navigate("/admin/dashboard", { state: { message: "Login Successful" } });
-        } else if (response.roleName === "USER") {
+        } else if (response.roleName === "ROLE_USER") {
           navigate("/user/home", { state: { message: "Login Successful" } });
-        } else if (response.roleName === "MEMBER") {
+        } else if (response.roleName === "ROLE_MEMBER") {
           navigate("/member/home", { state: { message: "Login Successful" } });
         } else {
           // Default redirection if the role is not recognized

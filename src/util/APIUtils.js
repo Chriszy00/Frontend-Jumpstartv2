@@ -33,14 +33,6 @@ export function login(loginRequest) {
   });
 }
 
-// export function member(memberRequest) {
-//   return request({
-//     url: '/membership/apply',
-//     method: 'POST',
-//     data: memberRequest,
-//   });
-// }
-
 export function payment(paymentRequest) {
   return request({
     url: '/checkout/success',
@@ -56,3 +48,19 @@ export function register(registerRequest) {
     data: registerRequest,
   });
 }
+
+export function apply(applyRequest) {
+  return request ({
+    url: '/membership/apply',
+    method: 'POST',
+    data: applyRequest,
+  });
+}
+
+// export function fetchApplication(fetchApplicationRequest) {
+//   return request ({
+//     url: '/membership/application',
+//     method: 'GET',
+//     data: fetchApplicationRequest,
+//   });
+// }

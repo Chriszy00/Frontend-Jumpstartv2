@@ -67,7 +67,7 @@ function Header() {
   return (
     <header>
       {/* Main Navbar */}
-      {(roleName !== "MEMBER" || !isLoggedIn) && ( // Conditionally render the main navbar
+      {(roleName !== "ROLE_MEMBER" || !isLoggedIn) && ( // Conditionally render the main navbar
         <nav className="navbar navbar-expand-lg navbar-light text-uppercase custom-font-med bg-navbar1">
           <div className="container">
             <div className="collapse navbar-collapse" id="navbarMain">
@@ -80,11 +80,11 @@ function Header() {
 
                   <li className="nav-item">
                     <Link className="nav-link" to="/membership">
-                      
+
                       Apply Membership
                     </Link>
                   </li>
-                
+
                 <li className="nav-item">
                   <Link className="nav-link" to="/cart">
                     <i className="fa fa-shopping-cart"></i> Cart
@@ -99,7 +99,7 @@ function Header() {
       {/* User Navbar */}
       <nav
         className={`navbar navbar-expand-lg navbar-light ${
-          roleName === "MEMBER" ? "bg-custom-color" : "bg-navbar2"
+          roleName === "ROLE_MEMBER" ? "bg-custom-color" : "bg-navbar2"
         } text-uppercase custom-font-med`}
       >
         <div className="container p-0">
@@ -118,7 +118,7 @@ function Header() {
             <ul className="navbar-nav mr-auto">
               {isLoggedIn ? (
                 <>
-                  {roleName === "USER" && (
+                  {roleName === "ROLE_USER" && (
                     <>
                       <li className="nav-item me-2">
                         <Link className="nav-link" to="/user/home">
@@ -144,7 +144,7 @@ function Header() {
                     </>
                   )}
 
-                  {roleName === "MEMBER" && (
+                  {roleName === "ROLE_MEMBER" && (
                     <>
                       <li className="nav-item me-2">
                         <Link className="navbar-brand text-dark" to="/">
@@ -185,7 +185,7 @@ function Header() {
             </ul>
 
             {!isLoggedIn && (
-              <ul className="navbar-nav ml-auto">
+              <ul className="navbar-nav mr-auto">
                 {" "}
                 {/* This will align the links to the right */}
                 <>
