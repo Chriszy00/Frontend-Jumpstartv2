@@ -4,7 +4,6 @@ import {
   PayPalButtons,
 } from "@paypal/react-paypal-js";
 import "../../assets/css/style-payment-summary.css";
-import axios from "axios";
 import { notification } from "antd"; // Import the notification component
 import { payment } from "../../util/APIUtils";
 import { useNavigate } from "react-router";
@@ -201,7 +200,7 @@ function PaymentSummary() {
                   id="tnc"
                 />
                 <label className="form-check-label" htmlFor="tnc">
-                  I agree to the <a href="#">terms and conditions</a>
+                  I agree to the <a href="#a">terms and conditions</a>
                 </label>
               </div>
               <div className="form-check mb-3 small">
@@ -214,7 +213,7 @@ function PaymentSummary() {
                 <label className="form-check-label" htmlFor="subscribe">
                   Get emails about product updates and events. If you change
                   your mind, you can unsubscribe at any time.{" "}
-                  <a href="#">Privacy Policy</a>
+                  <a href="#a">Privacy Policy</a>
                 </label>
               </div>
               {/* <button className="btn btn-primary w-100 mt-2">
